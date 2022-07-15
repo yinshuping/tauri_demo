@@ -56,7 +56,6 @@
         "scope": [
           "https://**",
           "http://**",
-          "https://xueqiu.com/*",
           "https://stock.xueqiu.com/*",
           "http://localhost:12123/*",
           "https://upsort.com/*"
