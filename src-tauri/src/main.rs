@@ -3,15 +3,14 @@
   windows_subsystem = "windows"
 )]
 
-use std::io;
 use tauri::{
     api, CustomMenuItem, Manager, SystemTray, SystemTrayEvent, SystemTrayMenu, SystemTrayMenuItem,
 };
-
-fn main() -> io::Result<()>{
+fn main() -> std::io::Result<()>{
   /*tauri::Builder::default()
       .run(tauri::generate_context!())
       .expect("error while running tauri application");*/
+
     #[cfg(target_os = "windows")]
     unsafe {
         use crate::utils::dirs;
@@ -36,7 +35,7 @@ fn main() -> io::Result<()>{
       let mut builder = tauri::Builder::default()
       .setup(|app| Ok(resolve::resolve_setup(app)))
       .system_tray(SystemTray::new().with_menu(tray_menu))
-      .on_system_tray_event(move |app_handle, event| match event {
+      /*.on_system_tray_event(move |app_handle, event| match event {
         SystemTrayEvent::MenuItemClick { id, .. } => match id.as_str() {
           "open_window" => {
             resolve::create_window(app_handle);
@@ -91,10 +90,10 @@ fn main() -> io::Result<()>{
           resolve::create_window(app_handle);
         }
         _ => {}
-      })
+      })*/
       .invoke_handler(tauri::generate_handler![
       // common
-      cmds::get_sys_proxy,
+      /*cmds::get_sys_proxy,
       cmds::get_cur_proxy,
       cmds::open_app_dir,
       cmds::open_logs_dir,
@@ -126,7 +125,7 @@ fn main() -> io::Result<()>{
       cmds::service::stop_service,
       cmds::service::check_service,
       cmds::service::install_service,
-      cmds::service::uninstall_service,
+      cmds::service::uninstall_service,*/
     ]);
 
   #[cfg(target_os = "macos")]
