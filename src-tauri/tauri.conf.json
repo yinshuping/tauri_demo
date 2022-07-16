@@ -46,7 +46,7 @@
       }
     },
     "security": {
-      "csp": "default-src https://localhost:12123 'self' localhost *.example.com"
+      "csp": "script-src 'unsafe-eval' 'self'; default-src blob: data: filesystem: ws: wss: http: https: tauri: 'unsafe-eval' 'unsafe-inline' 'self'; img-src data: 'self';"
     },
     "allowlist": {
       "all": true,
@@ -65,9 +65,9 @@
     "updater": {
       "active": true,
       "endpoints": [
-        "https://localhost:12123/update/{{target}}/{{current_version}}"
+        "http://localhost:12123/update/{{target}}/{{current_version}}"
       ],
-      "dialog": true,
+      "dialog": false,
       "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IDE5QzMxNjYwNTM5OEUwNTgKUldSWTRKaFRZQmJER1h4d1ZMYVA3dnluSjdpN2RmMldJR09hUFFlZDY0SlFqckkvRUJhZDJVZXAK"
     },
     "windows": [

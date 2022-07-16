@@ -4,6 +4,32 @@ import { ref } from 'vue'
 defineProps<{ msg: string }>()
 
 const count = ref(0)
+import { emit } from "@tauri-apps/api/event";
+import { checkUpdate, installUpdate } from "@tauri-apps/api/updater";
+import { listen } from "@tauri-apps/api/event";
+try {
+  emit("tauri://update");
+  const { shouldUpdate, manifest } = await checkUpdate();
+
+  if (shouldUpdate) {
+
+    // display dialog
+   await installUpdate();
+    // install complete, ask to restart
+  }
+  listen("tauri://update-available", function (res) {
+    console.log("New version available: ", res);
+  });
+ /* const { shouldUpdate, manifest } = await checkUpdate();
+
+  if (shouldUpdate) {
+    // display dialog
+    await installUpdate();
+    // install complete, ask to restart
+  }*/
+} catch(error) {
+  console.log(error);
+}
 </script>
 
 <template>
